@@ -24,16 +24,16 @@ def get_pdf_as_image(pdf_path, rotate=0):
             return None
     return None
 
-# Load certificate PDFs
-parent_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(parent_dir)  # Go up one level
+# Load certificate PDFs - use certificates folder in same directory as app.py
+app_dir = os.path.dirname(os.path.abspath(__file__))
+cert_dir = os.path.join(app_dir, "certificates")
 
 cert_files = {
-    "jpmorgan": os.path.join(parent_dir, "Dhruv Naveen Jp morgan chase certificate.pdf"),
-    "sql_basic": os.path.join(parent_dir, "Dhruv Naveen SQL basic Certification Hacker rank.pdf"),
-    "sql_int": os.path.join(parent_dir, "Dhruv Naveen SQL intermediate certificate Hacker rank.pdf"),
-    "python": os.path.join(parent_dir, "Dhruv Naveen python certification Edcept.pdf"),
-    "gitex": os.path.join(parent_dir, "GITEX Global 2025 Certificate of Participation - Student Delegate.pdf")
+    "jpmorgan": os.path.join(cert_dir, "jpmorgan.pdf"),
+    "sql_basic": os.path.join(cert_dir, "sql_basic.pdf"),
+    "sql_int": os.path.join(cert_dir, "sql_intermediate.pdf"),
+    "python": os.path.join(cert_dir, "python.pdf"),
+    "gitex": os.path.join(cert_dir, "gitex.pdf")
 }
 
 # Page configuration
