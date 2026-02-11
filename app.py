@@ -20,20 +20,24 @@ def get_pdf_as_image(pdf_path, rotate=0):
             doc.close()
             return base64.b64encode(img_bytes).decode('utf-8')
         except Exception as e:
-            print(f"Error loading {pdf_path}: {e}")
+            st.error(f"Error loading {pdf_path}: {e}")
             return None
+    else:
+        st.warning(f"File not found: {pdf_path}")
     return None
 
 # Load certificate PDFs - use certificates folder in same directory as app.py
-app_dir = os.path.dirname(os.path.abspath(__file__))
-cert_dir = os.path.join(app_dir, "certificates")
+# Use Path for cross-platform compatibility
+from pathlib import Path
+app_dir = Path(__file__).parent.resolve()
+cert_dir = app_dir / "certificates"
 
 cert_files = {
-    "jpmorgan": os.path.join(cert_dir, "jpmorgan.pdf"),
-    "sql_basic": os.path.join(cert_dir, "sql_basic.pdf"),
-    "sql_int": os.path.join(cert_dir, "sql_intermediate.pdf"),
-    "python": os.path.join(cert_dir, "python.pdf"),
-    "gitex": os.path.join(cert_dir, "gitex.pdf")
+    "jpmorgan": str(cert_dir / "jpmorgan.pdf"),
+    "sql_basic": str(cert_dir / "sql_basic.pdf"),
+    "sql_int": str(cert_dir / "sql_intermediate.pdf"),
+    "python": str(cert_dir / "python.pdf"),
+    "gitex": str(cert_dir / "gitex.pdf")
 }
 
 # Page configuration
@@ -148,16 +152,16 @@ st.markdown("""
         visibility: hidden;
         opacity: 0;
         position: fixed;
-        left: 50%;
+        left: 55%;
         top: 50%;
         transform: translate(-50%, -50%);
-        max-width: 90vw;
+        max-width: 85vw;
         max-height: 85vh;
         background-color: white;
         border-radius: 12px;
-        z-index: 99999;
+        z-index: 999999 !important;
         transition: all 0.3s ease;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
         padding: 15px;
     }
     .cert-hover:hover .cert-preview {
@@ -165,7 +169,7 @@ st.markdown("""
         opacity: 1;
     }
     .cert-hover .cert-preview img {
-        max-width: 85vw;
+        max-width: 80vw;
         max-height: 80vh;
         border-radius: 8px;
         object-fit: contain;
