@@ -26,18 +26,16 @@ def get_pdf_as_image(pdf_path, rotate=0):
         st.warning(f"File not found: {pdf_path}")
     return None
 
-# Load certificate PDFs - use certificates folder in same directory as app.py
-# Use Path for cross-platform compatibility
+# Load certificate PDFs - PDFs are in same directory as app.py
 from pathlib import Path
 app_dir = Path(__file__).parent.resolve()
-cert_dir = app_dir / "certificates"
 
 cert_files = {
-    "jpmorgan": str(cert_dir / "jpmorgan.pdf"),
-    "sql_basic": str(cert_dir / "sql_basic.pdf"),
-    "sql_int": str(cert_dir / "sql_intermediate.pdf"),
-    "python": str(cert_dir / "python.pdf"),
-    "gitex": str(cert_dir / "gitex.pdf")
+    "jpmorgan": str(app_dir / "jpmorgan.pdf"),
+    "sql_basic": str(app_dir / "sql_basic.pdf"),
+    "sql_int": str(app_dir / "sql_intermediate.pdf"),
+    "python": str(app_dir / "python.pdf"),
+    "gitex": str(app_dir / "gitex.pdf")
 }
 
 # Page configuration
